@@ -11,7 +11,6 @@ export class ViewportSizeService {
   size$: Observable<string>;
 
   constructor(@Inject('SIZE_CONFIG') config: IConfig) { 
-    console.log('config', config);
     this.size$ = Observable.fromEvent(window, 'resize')
       .pipe(
         debounceTime(150),

@@ -25,15 +25,12 @@ export class IfViewportSizeDirective implements OnInit, OnDestroy{
       viewportSizeService.size$
         .pipe(takeUntil(this.destroy$))
           .subscribe((size) => {
-            console.log('size', size);
             this.onSizeChange(size);
           }, 
           (error) => {
-            console.log('error', error);
+            console.warn('error', error);
           },
-          () => {
-            console.log('complete');
-          });
+          () => {});
       });
   }
 
@@ -49,7 +46,6 @@ export class IfViewportSizeDirective implements OnInit, OnDestroy{
     this.destroy$.complete();
   }
   onSizeChange(size: string) {
-    console.log('setVisibility');
     if( this.elementSize === size ) {
       this.zone.run(() => this.viewContainer.createEmbeddedView(this.templateRef));
     } else {
